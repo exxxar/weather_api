@@ -129,6 +129,11 @@ class GismeteoAPI
     //$region = 4445
     public function oneMonthAPI($region, $year, $month)
     {
+        $path = "result-$region-$year-$month.json";
+
+        if (Storage::exists($path))
+            return json_decode(Storage::get($path));
+
         $dom = HtmlDomParser::file_get_html("https://www.gismeteo.ru/diary/$region/$year/$month/", false, null, 0);
 
         $global_tmp = [];
@@ -172,6 +177,7 @@ class GismeteoAPI
 
         }
 
+        Storage::put($path, json_encode($jsonResult));
 
         return $jsonResult;
     }

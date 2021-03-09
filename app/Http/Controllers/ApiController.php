@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Classes\GismeteoAPI;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class ApiController extends Controller
 {
@@ -21,6 +22,7 @@ class ApiController extends Controller
         try {
             return response()->json($this->gismeteo->oneMonthAPI($region_id, $year, $month));
         } catch (\Exception $ex) {
+            Log::info($ex->getMessage());
             return response()->json([
                 "message" => "Ошибка параметров запроса"
             ]);
