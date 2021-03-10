@@ -3,6 +3,8 @@
 namespace App\Classes;
 
 
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use KubAT\PhpSimple\HtmlDomParser;
 
@@ -131,8 +133,18 @@ class GismeteoAPI
     {
         $path = "result-$region-$year-$month.json";
 
-        if (Storage::exists($path))
-            return json_decode(Storage::get($path));
+
+        if (Storage::exists($path)) {
+            $tmp_array = json_decode(Storage::get($path));
+
+            $tmp_array = array_filter($tmp_array, function ($item) {
+                return ((object)$item)->index == Carbon::now()->subDay()->day;
+            });
+
+            if (count($tmp_array) > 0) {
+                return json_decode(Storage::get($path));
+            }
+        }
 
         $dom = HtmlDomParser::file_get_html("https://www.gismeteo.ru/diary/$region/$year/$month/", false, null, 0);
 
@@ -181,7 +193,6 @@ class GismeteoAPI
 
         return $jsonResult;
     }
-
 
 
 }
