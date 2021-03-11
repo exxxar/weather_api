@@ -184,6 +184,11 @@ class PogodaIKlimatAPI
 
 
         $daysInMonth = Carbon::create($year, $month)->daysInMonth;
+        $currentMonth = Carbon::now()->month;
+        $currentDay = Carbon::now()->day;
+
+        $daysInMonth = $month == $currentMonth ? $daysInMonth : $currentDay;
+
 
         $dom = HtmlDomParser::file_get_html("http://www.pogodaiklimat.ru/weather.php?id=$region&bday=1&fday=$daysInMonth&amonth=$month&ayear=$year&bot=2", false, null, 0);
 
