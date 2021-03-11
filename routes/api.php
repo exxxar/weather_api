@@ -21,7 +21,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::group(["prefix" => "v1"], function () {
 
-    Route::get("/weather/{city_id}/{year}/{month}", \ApiController::class . "@index")
+    Route::get("/weather/{city_id}/{year}/{month}", \ApiController::class . "@indexV1")
         ->where([
             "city_id" => "[0-9]+",
             "month" => "[0-9]{1,2}",
@@ -29,4 +29,15 @@ Route::group(["prefix" => "v1"], function () {
         ]);
     Route::get("/dictionaries", \ApiController::class . "@dictionaries");
 
+});
+
+
+Route::group(["prefix" => "v2"], function () {
+
+    Route::get("/weather/{city_id}/{year}/{month}", \ApiController::class . "@indexV2")
+        ->where([
+            "city_id" => "[0-9]+",
+            "month" => "[0-9]{1,2}",
+            "year" => "[0-9]{4}",
+        ]);
 });
