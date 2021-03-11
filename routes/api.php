@@ -27,7 +27,7 @@ Route::group(["prefix" => "v1"], function () {
             "month" => "[0-9]{1,2}",
             "year" => "[0-9]{4}",
         ]);
-    Route::get("/dictionaries", \ApiController::class . "@dictionaries");
+    Route::get("/dictionaries", \ApiController::class . "@dictionariesV1");
 
 });
 
@@ -40,4 +40,6 @@ Route::group(["prefix" => "v2"], function () {
             "month" => "[0-9]{1,2}",
             "year" => "[0-9]{4}",
         ]);
+
+    Route::get("/dictionaries", \ApiController::class . "@dictionariesV2");
 });

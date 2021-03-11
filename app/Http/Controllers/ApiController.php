@@ -45,7 +45,7 @@ class ApiController extends Controller
         }
     }
 
-    public function dictionaries()
+    public function dictionariesV1()
     {
         return response()->json([
             "cloudy" => $this->gismeteo->getCloudyDictionary(),
@@ -54,4 +54,9 @@ class ApiController extends Controller
         ]);
     }
 
+
+    public function dictionariesV2()
+    {
+        return response()->json($this->pogodaiklimat->getFullDescription());
+    }
 }
