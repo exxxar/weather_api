@@ -170,18 +170,18 @@ class GismeteoAPI
             array_push($jsonResult, (object)[
                 "index" => $item[0],
                 "day" => (object)[
-                    "temperature" => $item[1],
-                    "pressure" => $item[2],
-                    "cloudy" => $item[3],
-                    "weather" => $item[4],
-                    "wind" => $item[5],
+                    "temperature" => $item[1]??'0',
+                    "pressure" => $item[2]??'0',
+                    "cloudy" => $item[3]??'0',
+                    "weather" => $item[4]??'0',
+                    "wind" => $item[5]??'0',
                 ],
                 "night" => (object)[
-                    "temperature" => $item[6],
-                    "pressure" => $item[7],
-                    "cloudy" => $item[8],
-                    "weather" => $item[9],
-                    "wind" => $item[10],
+                    "temperature" => $item[6]??'0',
+                    "pressure" => $item[7]??'0',
+                    "cloudy" => $item[8]??'0',
+                    "weather" => $item[9]??'0',
+                    "wind" => $item[10]??'0',
                 ]
             ]
             );

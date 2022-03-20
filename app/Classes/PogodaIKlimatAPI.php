@@ -47,34 +47,34 @@ class PogodaIKlimatAPI
 
                 $object = (object)[
                     "wind" => (object)[
-                        "type" => $this->prepare($elements[0]->innertext ?? ''),
-                        "speed" => $this->prepare($elements[1]->innertext ?? '')
+                        "type" => $this->prepare($elements[0]->innertext ?? 'СВ'),
+                        "speed" => $this->prepare($elements[1]->innertext ?? '0')
                     ],
                     "visibility" => (object)[
                         "type" => $tmp_visibility[1] ?? 'км',
-                        "value" => $tmp_visibility[0] ?? 0,
+                        "value" => $tmp_visibility[0] ?? '0',
                     ],
 
                     "weather_condition" => $this->prepare($elements[3]->innertext ?? ''),
                     "cloudy" => $this->prepare($elements[4]->innertext ?? ''),
-                    "relative_humidity" => $this->prepare($elements[7]->innertext ?? ''),
+                    "relative_humidity" => $this->prepare($elements[7]->innertext ?? '0'),
                     "temperature" => (object)[
-                        "air" => $this->prepare($elements[5]->innertext ?? ''),
-                        "dew_point" => $this->prepare($elements[6]->innertext ?? ''),
-                        "effective_in_shade" => $this->prepare($elements[8]->innertext ?? ''),
-                        "effective_on_sun" => $this->prepare($elements[9]->innertext ?? ''),
-                        "min" => $this->prepare($elements[13]->innertext ?? ''),
-                        "max" => $this->prepare($elements[14]->innertext ?? ''),
+                        "air" => $this->prepare($elements[5]->innertext ?? '0'),
+                        "dew_point" => $this->prepare($elements[6]->innertext ?? '0'),
+                        "effective_in_shade" => $this->prepare($elements[8]->innertext ?? '0'),
+                        "effective_on_sun" => $this->prepare($elements[9]->innertext ?? '0'),
+                        "min" => $this->prepare($elements[13]->innertext ?? '0'),
+                        "max" => $this->prepare($elements[14]->innertext ?? '0'),
                     ],
-                    "comfort" => $this->prepare($elements[10]->innertext ?? ''),
+                    "comfort" => $this->prepare($elements[10]->innertext ?? '0'),
                     "pressure" => (object)[
-                        "sea_level_atmospheric" => $this->prepare($elements[11]->innertext ?? ''),
-                        "meteorological_station_level_atmospheric" => $this->prepare($elements[12]->innertext ?? ''),
+                        "sea_level_atmospheric" => $this->prepare($elements[11]->innertext ?? '0'),
+                        "meteorological_station_level_atmospheric" => $this->prepare($elements[12]->innertext ?? '0'),
                     ],
                     "precipitation" => (object)[
-                        "r" => $this->prepare($elements[15]->innertext ?? ''),
-                        "r24" => $this->prepare($elements[16]->innertext ?? ''),
-                        "s" => $this->prepare($elements[17]->innertext ?? ''),
+                        "r" => $this->prepare($elements[15]->innertext ?? '0'),
+                        "r24" => $this->prepare($elements[16]->innertext ?? '0'),
+                        "s" => $this->prepare($elements[17]->innertext ?? '0'),
                     ]
 
                 ];
@@ -188,7 +188,6 @@ class PogodaIKlimatAPI
         $currentDay = Carbon::now()->day;
 
         $daysInMonth = $month == $currentMonth ? $currentDay :$daysInMonth ;
-
 
         $dom = HtmlDomParser::file_get_html("http://www.pogodaiklimat.ru/weather.php?id=$region&bday=1&fday=$daysInMonth&amonth=$month&ayear=$year&bot=2", false, null, 0);
 
